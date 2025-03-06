@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken'
-import User from '../models/user.model'
-import e from 'express';
+import User from '../models/user.model.js'
+import express from 'express';
 
 export const protectRoute = async(req,res,next) =>{
   try{
-  const token = req.cookie.ChatApp; 
+  const token = req.cookies.ChatApp; 
   if(!token ) return  res.status(401).json({message:"unautorized access- no token provided "})
   const verifyUser = jwt.verify(token, process.env.JWT_SECRET);
   if(!verifyUser){

@@ -1,3 +1,4 @@
+import cloudinary from "../lib/cloudinary.js";
 import { genrateToken } from "../lib/Utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
@@ -72,5 +73,20 @@ export const logout = (req, res) => {
 };
 
 export const updateProfile = async (req,res)=>{
+try {const {profilePic} = req.body;
+const userId = req.user._id;
+if (!profilePic)
+  return res
+    .status(400)
+    .json({ message: "no profile pic provided" });
 
+const uploadResponse = await cloudinary.uploader.upload(profilePic)
+const updatedUser = await findByIdAndUpdate(userId, {profilePic: uploadResponse.secure_url}, {new:true});
+res.status(200).json({message: 'updated user '})
+}
+catch(e){
+res.status(500).json({message:"something went wrong"});
+console.log('error in uploading image',e);
+
+}
 }

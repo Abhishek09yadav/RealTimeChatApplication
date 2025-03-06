@@ -2,7 +2,8 @@ import express from "express";
 import authRoutes from "./routes/auth.route.js";
 import dotenv from "dotenv";
 import connectDB from "./lib/db.js";
-import cookieParser from 'cookei-parser'
+import cookieParser from 'cookie-parser'
+import User from "./models/user.model.js";
 const PORT = process.env.PORT || 5999;
 const app = express();
 dotenv.config();
