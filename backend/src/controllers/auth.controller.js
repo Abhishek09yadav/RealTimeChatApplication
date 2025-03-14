@@ -82,11 +82,20 @@ if (!profilePic)
 
 const uploadResponse = await cloudinary.uploader.upload(profilePic)
 const updatedUser = await findByIdAndUpdate(userId, {profilePic: uploadResponse.secure_url}, {new:true});
-res.status(200).json({message: 'updated user '})
+  res.status(200).json(updatedUser);
 }
 catch(e){
 res.status(500).json({message:"something went wrong"});
 console.log('error in uploading image',e);
-
 }
+}
+export const checkAuth = (req,res) =>{
+  try{
+res.status(200).json(req.user);
+  }
+
+  catch(e){
+    console.log('error in checkAuth',e.message);
+     res.status(500).json({message:"something went wrong"});
+  }
 }
