@@ -1,28 +1,25 @@
-import jwt from 'jsonwebtoken'
-import User from '../models/user.model.js'
-import express from 'express';
+import jwt from "jsonwebtoken";
+import User from "../models/user.model.js";
 
-export const protectRoute = async(req,res,next) =>{
-  try{
-  const token = req.cookies.ChatApp; 
-  if(!token ) return  res.status(401).json({message:"unautorized access- no token provided "})
-  const verifyUser = jwt.verify(token, process.env.JWT_SECRET);
-  if(!verifyUser){
-      if (!token)
-        return res.status(401).json({ message: "unautorized access due to invalid token" });
+export const protectRoute = async (req, res, next) => {
+  try {
+    const token = req.cookies?.ChatApp;
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized - No token" });
+    }
+
+    const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("Decoded userId:", userId);
+
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    req.user = user;
+    next();
+  } catch (error) {
+    console.error("Error in protectRoute:", error.message);
+    res.status(401).json({ message: "Invalid or expired token" });
   }
-  const user = await User.findById(verifyUser.userId).select('-password')
-  if(!user){
-    return res
-      .status(404)
-      .json({ message: "user not found" });
-  }
-  req.user =user;
-  next()
-}
-catch{
-console.log('error in protectRoute middleware',error);
-
-
-}
-}
+};
