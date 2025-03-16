@@ -1,9 +1,10 @@
-import React from 'react'
+"use client";
+import { useAuthStore } from "@/store/useAuthStore";
+import React from "react";
 
 const HomePage = () => {
-  return (
-    <div>HomePage</div>
-  )
-}
+  const { authUser } = useAuthStore();
+  return <div>HomePage</div>;
+};
 
-export default HomePage
+export default HomePage;

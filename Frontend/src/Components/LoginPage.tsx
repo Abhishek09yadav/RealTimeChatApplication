@@ -1,9 +1,10 @@
-import React from 'react'
+"use client";
+import { useAuthStore } from "@/store/useAuthStore";
+import React from "react";
 
 const LoginPage = () => {
-  return (
-    <div>LoginPage</div>
-  )
-}
+  const { authUser } = useAuthStore();
+  return <div>LoginPage</div>;
+};
 
-export default LoginPage
+export default LoginPage;
