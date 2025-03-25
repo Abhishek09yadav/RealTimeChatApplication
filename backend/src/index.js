@@ -10,7 +10,12 @@ const PORT = process.env.PORT || 5999;
 const app = express();
 app.use(cookieParser());
 dotenv.config();
-app.use(cors({}))
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.listen(PORT, () => {
   console.log(`server is running on port number ${PORT}`);
   connectDB();

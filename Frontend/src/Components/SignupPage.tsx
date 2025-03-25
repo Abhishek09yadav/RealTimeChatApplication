@@ -4,14 +4,14 @@ import { useRouter } from "next/navigation";
 import { axiosInstance } from "@/lib/axios";
 
 interface SignupFormData {
-  name: string;
+  fullName: string;
   email: string;
   password: string;
 }
 
 export default function SignupPage() {
   const [formData, setFormData] = useState<SignupFormData>({
-    name: "",
+    fullName: "",
     email: "",
     password: "",
   });
@@ -30,8 +30,8 @@ export default function SignupPage() {
   const validateForm = (): boolean => {
     const newErrors: Partial<SignupFormData> = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = "fullName is required";
     }
 
     if (!formData.email.trim()) {
@@ -57,7 +57,7 @@ export default function SignupPage() {
       axiosInstance
         .post("/auth/signup", formData)
         .then((res) => res.data)
-        .then((res) => console.log("signup response",res))
+        .then((res) => console.log("signup respons",res))
         .then(() => router.push("/login"))
         .catch((err) => console.log(err));
     }
@@ -74,29 +74,25 @@ export default function SignupPage() {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="name" className="sr-only">
-                Name
-              </label>
+              <label htmlFor="fullName">Name</label>
               <input
-                id="name"
-                name="name"
+                id="fullName"
+                name="fullName"
                 type="text"
                 required
                 className={`appearance-none rounded-none relative block w-full px-3 py-2 border ${
-                  errors.name ? "border-red-500" : "border-gray-300"
+                  errors.fullName ? "border-red-500" : "border-gray-300"
                 } placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
                 placeholder="Full Name"
-                value={formData.name}
+                value={formData.fullName}
                 onChange={handleChange}
               />
-              {errors.name && (
-                <p className="mt-1 text-red-500 text-xs">{errors.name}</p>
+              {errors.fullName && (
+                <p className="mt-1 text-red-500 text-xs">{errors.fullName}</p>
               )}
             </div>
             <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
+              <label htmlFor="email">Email address</label>
               <input
                 id="email"
                 name="email"
@@ -114,9 +110,7 @@ export default function SignupPage() {
               )}
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
+              <label htmlFor="password">Password</label>
               <input
                 id="password"
                 name="password"
