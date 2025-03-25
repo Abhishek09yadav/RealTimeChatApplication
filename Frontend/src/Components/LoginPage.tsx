@@ -3,14 +3,19 @@ import React, { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { axiosInstance } from "@/lib/axios";
 import { toast, ToastContainer } from "react-toastify";
+import Link from "next/link";
+import { useAuthStore } from "@/store/useAuthStore";
 
-
+interface AuthStore {
+  login: (data: object) => void;
+  isLoggingIn: boolean;
+}
 interface LoginFormData {
-
   email: string;
   password: string;
 }
 export default function LoginPage() {
+  const { login, isLoggingIn } = useAuthStore() as AuthStore;
 
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
@@ -46,36 +51,31 @@ export default function LoginPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    if (validateForm()) {
-      axiosInstance
-        .post("/auth/login", formData)
-        .then((res) => res.data)
-        .then((res) => {
-          console.log("login respons", res.data);
-          toast.success(res.message);
-        })
-        .then(() => router.push("/"))
-        .catch((err) => {
-          console.log(err);
-          toast.error(err.message);
-        });
+  if (validateForm()) {
+    try {
+      const res = await login(formData); 
+      toast.success(res?.message || "Login successful!");
+      router.push("/");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response?.data?.message || "Login failed.");
     }
-  };
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Create your account
+            Login to your account
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
-      
             <div>
               <label htmlFor="email">Email address</label>
               <input
@@ -123,8 +123,20 @@ export default function LoginPage() {
             </button>
           </div>
         </form>
+        {/* signup Link section */}
+        <div className="flex items-center justify-center">
+          <p className="text-sm text-gray-600">
+            Don&apos;t have an account?{" "}
+            <Link
+              href="/SignupPage"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Signup
+            </Link>
+          </p>
+        </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }
