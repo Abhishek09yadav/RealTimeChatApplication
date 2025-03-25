@@ -2,14 +2,16 @@
 import React, { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { axiosInstance } from "@/lib/axios";
+import { toast, ToastContainer } from "react-toastify";
+// import { useAuthStore } from "@/store/useAuthStore";
 
 interface SignupFormData {
   fullName: string;
   email: string;
   password: string;
 }
-
 export default function SignupPage() {
+  // const { isSigningUp } = useAuthStore();
   const [formData, setFormData] = useState<SignupFormData>({
     fullName: "",
     email: "",
@@ -57,9 +59,15 @@ export default function SignupPage() {
       axiosInstance
         .post("/auth/signup", formData)
         .then((res) => res.data)
-        .then((res) => console.log("signup respons",res))
-        .then(() => router.push("/login"))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          console.log("signup respons", res);
+          toast.success(res.message);
+        })
+        .then(() => router.push("/LoginPage"))
+        .catch((err) => {
+          console.log(err);
+          toast.error(err.message);
+        });
     }
   };
 
@@ -139,6 +147,7 @@ export default function SignupPage() {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }
