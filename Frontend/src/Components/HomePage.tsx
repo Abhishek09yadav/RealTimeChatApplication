@@ -1,14 +1,10 @@
 "use client";
 
 import { useAuthStore } from "@/store/useAuthStore";
-import { useEffect, useReducer } from "react";
+import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
-interface AuthStore {
-  authUser: string | null;
-  checkAuth: () => void;
-  isCheckingAuth: true | false;
-}
+import { AuthStore } from "./types";
 
 export default function HomePage() {
   const router = useRouter();

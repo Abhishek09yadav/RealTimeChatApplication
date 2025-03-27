@@ -1,23 +1,20 @@
 "use client";
 
 import { useAuthStore } from "@/store/useAuthStore";
-import { useEffect, useReducer } from "react";
+import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Camera, Mail, User } from "lucide-react";
 import Image from "next/image";
-interface AuthStore {
-  authUser: string | null;
-  checkAuth: () => void;
-  isCheckingAuth: true | false;
-}
+import { AuthStore } from "./types";
 
+const handleImageUpload = () => {};
 export default function ProfilePage() {
   const router = useRouter();
   const {
     authUser,
     checkAuth,
-    isupdatingProfile,
+    isUpdatingProfile,
     updateProfile,
     isCheckingAuth,
   } = useAuthStore() as AuthStore;
@@ -43,22 +40,41 @@ export default function ProfilePage() {
           <p className="mt-2 text-center">Your profile information</p>
         </div>
         {/* avtar && the upload section */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center gap-4 mt-3">
           <div className="relative">
             <Image
-              alt="profile img"
-              src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80"
               width={100}
               height={100}
-              className="rounded-full object-contain"
+              src="/profile.jpg"
+              alt="Profile"
+              className="size-32 rounded-full object-cover border-4"
             />
-            <label htmlFor="avatar-upload"
-            className={
-              
-              `abolute bottom-0 right-0 bg-base-content`
-            }
-            
-            >wewe</label>
+            <label
+              htmlFor="avatar-upload"
+              className={`absolute bottom-0 right-0  bg-base-content hover:scale-105 p-2 rounded-full cursor-pointer transition-transform duration-200 ease-in-out ${
+                isUpdatingProfile ? "animate-pulse pointer-events-none" : ""
+              }`}
+            >
+              <Camera className="w-5 h-5 text-base-200" />
+              <input
+                type="file"
+                id="avatar-upload"
+                className="hidden"
+                accept="*/image"
+                onChange={handleImageUpload}
+                disabled={isUpdatingProfile}
+              />
+            </label>
+            <p className="">{isUpdatingProfile ? "uploading..." : "upload"}</p>
+          </div>
+        </div>
+        <div className="space-y-6">
+          <div className="space-y-1.5">
+            <div className="text-sm text-zinc-400 flex items-center gap-2 ">
+              <User className="w-4 h-4" />
+              Full Name
+              <p>{authUser && authUser.fullName}</p>
+            </div>
           </div>
         </div>
       </div>

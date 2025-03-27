@@ -3,10 +3,8 @@ import React from "react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { LogOut, MessageSquare, Settings, User } from "lucide-react";
 import { useRouter } from "next/navigation";
-interface AuthStore {
-  logout: () => void;
-  authUser: object;
-}
+import { AuthStore } from "./types";
+
 const Navbar = () => {
   const { logout, authUser } = useAuthStore() as AuthStore;
   const router = useRouter();

@@ -1,11 +1,13 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import { toast } from "react-toastify";
-export const useAuthStore = create((set) => ({
+
+export const useAuthStore = create((set)  => ({
+  
   authUser: null,
   isSigningUp: false,
   isLoggingIn: false,
-  isupdatingProfile: false,
+  isUpdatingProfile: false,
   isCheckingAuth: true,
   checkAuth: async () => {
     try {
@@ -54,13 +56,10 @@ export const useAuthStore = create((set) => ({
       await axiosInstance.get("/auth/logout");
       set({ authUser: null });
       toast.success("Logout successful");
-      
     } catch (e) {
       console.log("logout error", e?.response);
       toast.error(e.response?.message);
     }
   },
-  updateProfile:async(data) =>{
-    
-  }
+  updateProfile: async (data) => {},
 }));
