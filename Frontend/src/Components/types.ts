@@ -1,7 +1,8 @@
 export interface AuthUser {
   fullName: string;
   email: string;
-  profileImage?: string;
+  profilePic?: string;
+  createdAt: string;
 }
 
 export interface AuthStore {

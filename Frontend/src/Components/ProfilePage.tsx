@@ -1,16 +1,24 @@
 "use client";
 
 import { useAuthStore } from "@/store/useAuthStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Camera, Mail, User } from "lucide-react";
 import Image from "next/image";
 import { AuthStore } from "./types";
 
-const handleImageUpload = () => {};
 export default function ProfilePage() {
   const router = useRouter();
+  const [selectedImg, setSelectedImg] = useState(null);
+  const [preview, setPreview] = useState<string | null>(null);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setSelectedImg(file);
+    setPreview(URL.createObjectURL(file));
+  };
   const {
     authUser,
     checkAuth,
@@ -20,7 +28,7 @@ export default function ProfilePage() {
   } = useAuthStore() as AuthStore;
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [checkAuth]);
   console.log({ authUser });
   if (isCheckingAuth && authUser === null) {
     return (
@@ -33,7 +41,7 @@ export default function ProfilePage() {
     router.push("/SignupPage");
   }
   return (
-    <div className="h-screen pt-20">
+    <div className="h-screen pt-20 ">
       <div className="max-w-2xl mx-auto  py-8">
         <div className="bg-base-300 rounded-xl p-6 space-y-8 ">
           <h1 className="text-3xl text-center font-semibold"> Profile</h1>
@@ -45,7 +53,7 @@ export default function ProfilePage() {
             <Image
               width={100}
               height={100}
-              src="/profile.jpg"
+              src={preview || authUser?.profilePic || "/profile.jpg"}
               alt="Profile"
               className="size-32 rounded-full object-cover border-4"
             />
@@ -65,7 +73,11 @@ export default function ProfilePage() {
                 disabled={isUpdatingProfile}
               />
             </label>
-            <p className="">{isUpdatingProfile ? "uploading..." : "upload"}</p>
+            <p className="">
+              {isUpdatingProfile
+                ? "uploading..."
+                : "Click the camera icon to update your photo"}
+            </p>
           </div>
         </div>
         <div className="space-y-6">
@@ -74,6 +86,27 @@ export default function ProfilePage() {
               <User className="w-4 h-4" />
               Full Name
               <p>{authUser && authUser.fullName}</p>
+            </div>
+          </div>
+          <div className="space-y-1.5">
+            <div className="text-sm text-zinc-400 flex items-center gap-2 ">
+              <Mail className="w-4 h-4" />
+              Email Address
+              <p>{authUser && authUser.email}</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-6 bg-base-300 rounded-xl p-6">
+          <h2 className="text-lg font-medium mb-4">Account Information</h2>
+          <div className="space-y-3 text-sm">
+            <div className="flex items-center justify-between py-2 border-b border-zinc-700">
+              <span>Member Since</span>
+              <span>{authUser && authUser?.createdAt.split("T")[0]}</span>
+            </div>
+            <div className="flex items-center justify-between py-2 border-b border-zinc-700">
+              <span>Account Status</span>
+
+              <span className="text-green-500">Active</span>
             </div>
           </div>
         </div>
