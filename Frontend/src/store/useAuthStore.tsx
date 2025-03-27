@@ -23,7 +23,7 @@ export const useAuthStore = create((set) => ({
     try {
       const res = await axiosInstance.post("/auth/login", formData);
       set({ authUser: res?.data });
-       toast.success("Logged in successfully");
+      toast.success("Logged in successfully");
       return res?.data;
     } catch (error) {
       console.log("Login error:", error);
@@ -32,7 +32,11 @@ export const useAuthStore = create((set) => ({
       set({ isLoggingIn: false });
     }
   },
-  signup: async (formData:{fullName: string; email: string; password: string}) => {
+  signup: async (formData: {
+    fullName: string;
+    email: string;
+    password: string;
+  }) => {
     set({ isSigningUp: true });
     try {
       const res = await axiosInstance.post("/auth/signup", formData);
@@ -45,16 +49,18 @@ export const useAuthStore = create((set) => ({
       set({ isSigningUp: false });
     }
   },
-  logout: async()=>{
-try{
-
-}catch(e){
-  await axiosInstance.post('/auth/logout');
-  set({authUser:null})
-  toast.success("Logout successful");
-  console.log("logout error", e.response?.data?.message);
-  toast.error("Logout failed");
-}
+  logout: async () => {
+    try {
+      await axiosInstance.get("/auth/logout");
+      set({ authUser: null });
+      toast.success("Logout successful");
+      
+    } catch (e) {
+      console.log("logout error", e?.response);
+      toast.error(e.response?.message);
+    }
+  },
+  updateProfile:async(data) =>{
+    
   }
 }));
-  

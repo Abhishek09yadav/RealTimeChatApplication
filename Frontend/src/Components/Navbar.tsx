@@ -12,7 +12,7 @@ const Navbar = () => {
   const router = useRouter();
   return (
     <header
-      className="bg-base-100 border-b border-base-300 fixed w-full top-0 z-40 
+      className="bg-base-100 border-b border-base-300  w-full top-0 z-40 
     backdrop-blur-lg bg-base-100/80"
     >
       <div className="h-16 container mx-auto px-4">
@@ -40,7 +40,7 @@ const Navbar = () => {
             </div>
             {authUser && (
               <>
-                <div className="flex items-center gap-3 cursor-pointer">
+                <div className="flex items-center bg-accent p-2 rounded-md  gap-1 transition-colors cursor-pointer" onClick ={() => router.push("/ProfilePage")}>
                   <User />
                   <span>{authUser?.fullName || "profile"}</span>
                 </div>

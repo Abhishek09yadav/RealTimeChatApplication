@@ -27,5 +27,5 @@ export default function HomePage() {
   if (!authUser) {
     router.push("/SignupPage");
   }
-  return <></>;
+  return <>Homepage</>;
 }
