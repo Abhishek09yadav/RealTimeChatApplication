@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 2703 ",
+    "dev": "next dev --turbopack -p 2703 && start http://localhost:2703",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
