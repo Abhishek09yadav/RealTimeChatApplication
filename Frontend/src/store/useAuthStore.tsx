@@ -3,7 +3,6 @@ import { axiosInstance } from "../lib/axios";
 import { toast } from "react-toastify";
 
 export const useAuthStore = create((set)  => ({
-  
   authUser: null,
   isSigningUp: false,
   isLoggingIn: false,
