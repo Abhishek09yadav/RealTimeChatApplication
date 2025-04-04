@@ -17,3 +17,9 @@ export interface AuthStore {
   updateProfile: (data: { profilePic: string }) => void;
   logout: () => void;
 }
+
+export interface ThemeStore {
+  theme:string | null,
+  setTheme: (theme:string | null)=> void;
+
+}

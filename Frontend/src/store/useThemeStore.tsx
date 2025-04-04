@@ -1,12 +1,9 @@
-import {create} from "zustand";
+import { create } from "zustand";
+import { ThemeStore } from "@/Components/types";
 
-const useThemeStore = create((set) =>({
-theme: localStorage.getItem("chat-theme") || "light",
-
-setTheme:(theme: string) => {
-  set((theme))
-  localStorage.setItem("chat-theme",theme);
-},
-}))
+const useThemeStore = create<ThemeStore>((set) => ({
+  theme: 'light',
+  setTheme: (newTheme) => set({ theme: newTheme }),
+}));
 
 export default useThemeStore;
