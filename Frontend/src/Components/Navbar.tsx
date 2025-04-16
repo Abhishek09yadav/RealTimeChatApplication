@@ -10,7 +10,7 @@ const Navbar = () => {
   const router = useRouter();
   return (
     <header
-      className="bg-base-100 border-b border-base-300  w-full top-0 z-40 
+      className=" border-b border-base-300  w-full top-0 z-40 
     backdrop-blur-lg bg-base-100/80"
     >
       <div className="h-16 container mx-auto px-4">

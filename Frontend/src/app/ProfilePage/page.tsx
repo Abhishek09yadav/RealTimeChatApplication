@@ -1,6 +1,6 @@
 
 import ProfilePage from '@/Components/ProfilePage'
-import { useAuthStore } from '@/store/useAuthStore';
+// import { useAuthStore } from '@/store/useAuthStore';
 import React from 'react'
 
 const page = () => {
