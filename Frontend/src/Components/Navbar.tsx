@@ -30,7 +30,7 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
               <div
                 className=" btn btn-sm gap-2 transition-colors"
-                onClick={() => router.push("/Settings")}
+                onClick={() => router.push("/SettingsPage")}
               >
                 <Settings className="w-4 h-4" />
                 <span>Settings</span>
