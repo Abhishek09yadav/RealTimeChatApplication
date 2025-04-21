@@ -21,14 +21,14 @@ const Dummy_Messages = [
 ];
 const SettingsPage = () => {
   const { theme, setTheme } = useThemeStore();
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const storedTheme = localStorage.getItem("chat-theme");
     setTheme(storedTheme || "light");
-  },[setTheme])
+  }, [setTheme]);
 
   return (
-    <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
+    <div className="container mx-auto px-4 pt-20 max-w-5xl">
       <div className="space-y-6">
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold">Theme</h2>
@@ -46,9 +46,17 @@ const SettingsPage = () => {
               }`}
               onClick={() => setTheme(item)}
             >
-              <div>
-                
+              <div className=" w-full rounded-md " data-theme={item}>
+                <div className="flex flex-row gap-px p-1 ">
+                  <div className="rounded bg-primary ">1</div>
+                  <div className="rounded bg-secondary ">2</div>
+                  <div className="rounded bg-accent">3</div>
+                  <div className="rounded bg-neutral">4</div>
+                </div>
               </div>
+              <span className="text-[11px]">
+                {item.charAt(0).toUpperCase()+ item.slice(1)}
+              </span>
             </button>
           ))}
         </div>
