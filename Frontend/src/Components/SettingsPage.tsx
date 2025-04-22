@@ -13,6 +13,7 @@ const Dummy_Messages = [
   },
   {
     id: 2,
+
     sender: "Bob",
     content: "I'm good, thanks! How ",
     isSent: false,
@@ -36,26 +37,26 @@ const SettingsPage = () => {
             Select your preferred theme
           </p>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap gap-4">
           {THEMES.map((item: string) => (
             <button
               key={item}
-              className={`group flex flex-col
-              items-center gap-2 p-4 rounded-lg border-2 transition-colors ${
+              className={` flex flex-col
+              items-center gap-2 w-1/3 md:w-1/5 p-4 rounded-lg border-2 transition-colors ${
                 theme === item ? "bg-base-200" : "hover:bg-base-200/50"
               }`}
               onClick={() => setTheme(item)}
             >
-              <div className=" w-full rounded-md " data-theme={item}>
-                <div className="flex flex-row gap-px p-1 ">
-                  <div className="rounded bg-primary ">1</div>
-                  <div className="rounded bg-secondary ">2</div>
-                  <div className="rounded bg-accent">3</div>
-                  <div className="rounded bg-neutral">4</div>
+              <div className=" w-full rounded-md overflow-hidden " data-theme={item}>
+                <div className="flex flex-row h-8   ">
+                  <div className="flex-1 rounded bg-primary "></div>
+                  {/* <div className="flex-1 rounded bg-secondary "></div> */}
+                  <div className=" flex-1 bg-accent"></div>
+                  <div className="rounded flex-1 bg-neutral"></div>
                 </div>
               </div>
-              <span className="text-[11px]">
-                {item.charAt(0).toUpperCase()+ item.slice(1)}
+              <span className="text-sm text-base-content font-medium mt-2 ">
+                {item.charAt(0).toUpperCase() + item.slice(1)}
               </span>
             </button>
           ))}
