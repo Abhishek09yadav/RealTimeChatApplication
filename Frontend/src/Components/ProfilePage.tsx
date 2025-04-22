@@ -22,8 +22,8 @@ export default function ProfilePage() {
   } = useAuthStore() as AuthStore;
 
 
-  const handleImageUpload =  (e:any) => {
-    console.log('hi')
+  const handleImageUpload =  (e) => {
+    // console.log('hi')
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();

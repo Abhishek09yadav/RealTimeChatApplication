@@ -47,11 +47,14 @@ const SettingsPage = () => {
               }`}
               onClick={() => setTheme(item)}
             >
-              <div className=" w-full rounded-md overflow-hidden " data-theme={item}>
+              <div
+                data-theme={item}
+                className="w-full rounded-md overflow-hidden bg-base-100 text-base-content "
+              >
                 <div className="flex flex-row h-8   ">
                   <div className="flex-1 rounded bg-primary "></div>
-                  {/* <div className="flex-1 rounded bg-secondary "></div> */}
-                  <div className=" flex-1 bg-accent"></div>
+                  <div className="flex-1 rounded bg-secondary "></div>
+                  {/* <div className=" flex-1 bg-accent"></div> */}
                   <div className="rounded flex-1 bg-neutral"></div>
                 </div>
               </div>
