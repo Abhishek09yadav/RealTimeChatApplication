@@ -29,3 +29,36 @@ export interface LoginResponse {
     messsage: string;
   }
 }
+
+export interface AxiosErrorResponse {
+  response?: {
+    data?: {
+      message?: string | null;
+    };
+  };
+}
+
+export interface User{
+  _id:string;
+  fullName:string;
+  email:string;
+  ProfilePic?:string;
+  createdAt:string;
+}
+export interface Message{
+  _id:string;
+  senderId:string;
+  receiverId:string;
+  text:string;
+  createdAt:string;
+}
+export interface ChatStore {
+  isUserLoading: boolean;
+  isMessagesLoading: boolean;
+  messages: Message[];
+  users: User[];
+  selectedUser: string | null;
+  setSelectedUser: (userId: string) => void;
+  getMessages: (userId: string) => Promise<void>;
+  getUsers: () => Promise<void>;
+}
