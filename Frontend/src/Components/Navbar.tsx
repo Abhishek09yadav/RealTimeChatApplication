@@ -23,7 +23,9 @@ const Navbar = () => {
             <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center ">
               <MessageSquare />
             </div>
-            <h1 className="font-bold text-primary">Chat App</h1>
+            <h1 className="font-bold text-primary transition-colors">
+              Chat App
+            </h1>
           </div>
           {/* settings and profile section */}
           <div className="flex flex-row items-center gap-3 cursor-pointer">
@@ -38,7 +40,10 @@ const Navbar = () => {
             </div>
             {authUser && (
               <>
-                <div className="flex items-center bg-accent p-2 rounded-md  gap-1 transition-colors cursor-pointer" onClick ={() => router.push("/ProfilePage")}>
+                <div
+                  className="flex items-center bg-accent p-2 rounded-md  gap-1 transition-colors cursor-pointer"
+                  onClick={() => router.push("/ProfilePage")}
+                >
                   <User />
                   <span>{authUser?.fullName.split(" ")[0] || "profile"}</span>
                 </div>

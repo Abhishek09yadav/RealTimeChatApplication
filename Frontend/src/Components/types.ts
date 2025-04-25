@@ -19,7 +19,13 @@ export interface AuthStore {
 }
 
 export interface ThemeStore {
-  theme:string | null,
-  setTheme: (theme:string | null)=> void;
+  theme: string | null;
+  setTheme: (theme: string | null) => void;
+  
+}
 
+export interface LoginResponse {
+  data:{
+    messsage: string;
+  }
 }

@@ -57,7 +57,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   if (validateForm()) {
     try {
       const res = await login(formData); 
-      toast.success(res?.message || "Login successful!");
+      toast.success( "Login successful!");
       router.push("/");
     } catch (err) {
       console.log(err);
