@@ -2,7 +2,7 @@
 import React, { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { axiosInstance } from "@/lib/axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { useAuthStore } from "@/store/useAuthStore";
 
@@ -11,14 +11,13 @@ interface AuthStore {
   isSigningUp: boolean;
 }
 
-
 interface SignupFormData {
   fullName: string;
   email: string;
   password: string;
 }
 export default function SignupPage() {
-   const { signup, isSigningUp } = useAuthStore() as AuthStore;
+  const { signup, isSigningUp } = useAuthStore() as AuthStore;
   // const { isSigningUp } = useAuthStore();
   const [formData, setFormData] = useState<SignupFormData>({
     fullName: "",
@@ -60,21 +59,20 @@ export default function SignupPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  if (validateForm()) {
-    try {
-      const res = await signup(formData); 
-      toast.success(res?.message || "Signup successful!");
-      router.push("/LoginPage");
-    } catch (err) {
-      console.log(err);
-      toast.error(err.response?.data?.message || "Signup failed.");
+    if (validateForm()) {
+      try {
+        const res = await signup(formData);
+        toast.success(res?.message || "Signup successful!");
+        router.push("/LoginPage");
+      } catch (err) {
+        console.log(err);
+        toast.error(err.response?.data?.message || "Signup failed.");
+      }
     }
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -154,7 +152,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         {/* signup Link section */}
         <div className="flex items-center justify-center">
           <p className="text-sm text-gray-600">
-           Already have an account?{" "}
+            Already have an account?{" "}
             <Link
               href="/LoginPage"
               className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -164,7 +162,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
           </p>
         </div>
       </div>
-      <ToastContainer />
+      
     </div>
   );
 }

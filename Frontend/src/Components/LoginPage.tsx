@@ -2,7 +2,7 @@
 import React, { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 // import { axiosInstance } from "@/lib/axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { useAuthStore } from "@/store/useAuthStore";
 
@@ -51,20 +51,20 @@ export default function LoginPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  if (validateForm()) {
-    try {
-      const res = await login(formData); 
-      toast.success( "Login successful!");
-      router.push("/");
-    } catch (err) {
-      console.log(err);
-      toast.error(err.response?.data?.message || "Login failed.");
+    if (validateForm()) {
+      try {
+        const res = await login(formData);
+        toast.success("Login successful!");
+        router.push("/");
+      } catch (err) {
+        console.log(err);
+        toast.error(err.response?.data?.message || "Login failed.");
+      }
     }
-  }
-};
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -136,7 +136,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
           </p>
         </div>
       </div>
-      <ToastContainer />
+      
     </div>
   );
 }

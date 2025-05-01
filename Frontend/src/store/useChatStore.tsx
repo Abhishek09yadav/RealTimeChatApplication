@@ -1,3 +1,4 @@
+"use client";
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import { axiosInstance } from "@/lib/axios";
@@ -13,7 +14,7 @@ export const useChatStore = create<ChatStore>((set) => ({
   getUsers: async () => {
     set({ isUserLoading: true });
     try {
-      const res = await axiosInstance.get("/messages/users");
+      const res = await axiosInstance.get("/message/users");
       set({ users: res.data });
     } catch (error) {
       const err = error as AxiosErrorResponse;
@@ -25,7 +26,7 @@ export const useChatStore = create<ChatStore>((set) => ({
   getMessages: async (userId) => {
     set({ isMessagesLoading: true });
     axiosInstance
-      .get(`/messages/${userId}`)
+      .get(`/message/${userId}`)
       .then()
       .catch((e) => {
         console.log(e);
