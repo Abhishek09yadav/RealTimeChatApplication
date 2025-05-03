@@ -22,8 +22,8 @@ const SidebarSkeleton = () => {
             </div>
             {/* user info for lg screen */}
             <div className="hidden lg:block text-left min-w-0 flex-col ">
-             <div className="skeleton h-4 w-32 mb-2"/>
-             <div className="skeleton h-3 w-16"/>
+              <div className="skeleton h-4 w-32 mb-2" />
+              <div className="skeleton h-3 w-16" />
             </div>
           </div>
         ))}
