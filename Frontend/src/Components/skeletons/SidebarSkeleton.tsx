@@ -1,6 +1,6 @@
 import React from "react";
 import { Users } from "lucide-react";
-
+import  '../HideScrollBar.css'
 const SidebarSkeleton = () => {
   const sekeletonContacts = Array(8).fill(null);
   return (
@@ -13,7 +13,7 @@ const SidebarSkeleton = () => {
         </div>
       </div>
       {/* skeleton contacts */}
-      <div className="overflow-y-scroll w-full py-3">
+      <div className="overflow-y-scroll scrollbar-hide w-full py-3">
         {sekeletonContacts.map((_, index) => (
           <div key={index} className="w-full p-3 flex items-center gap-3">
             {/* avtar */}

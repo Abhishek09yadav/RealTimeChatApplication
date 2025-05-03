@@ -4,12 +4,16 @@ import React, { useEffect, useState } from "react";
 import { ChatStore } from "./types";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
-
+import "./HideScrollBar.css";
 const SideBar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
     useChatStore() as ChatStore;
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
-  const onlineUsers = [];
+  let onlineUsers = [];
+
+  const filteredUsers = showOnlineOnly
+    ? users.filter((user) => onlineUsers.includes(user._id))
+    : users;
 
   useEffect(() => {
     getUsers();
@@ -25,32 +29,24 @@ const SideBar = () => {
           <span className="font-medium hidden lg:block">Contacts</span>
         </div>
       </div>
-      <div className="mt-3  lg:flex items-center gap-2">
-
-        <label className="cursor-pointer flex items-center gap-2" >
+      <div className="mt-3 hidden lg:flex flex-col items-center gap-2">
+        <label className="cursor-pointer flex items-center gap-2">
           <input
-          type="checkbox"
-          checked={showOnlineOnly}
-          onChange={(e) => setShowOnlineOnly(e.target.checked)}
-          className="checkbox checkbox-sm border-base-300 bg-secondary"
+            type="checkbox"
+            checked={showOnlineOnly}
+            onChange={(e) => setShowOnlineOnly(e.target.checked)}
+            className="checkbox checkbox-sm bg-secondary"
           />
           <span>filter online users</span>
         </label>
+        <p className="text-xs text-zinc-500">
+          {onlineUsers?.length} users online
+        </p>
       </div>
-      {/* skeleton contacts */}
-      <div className="overflow-y-scroll w-full py-3">
-        {users.map((_, index) => (
-          <div key={index} className="w-full p-3 flex items-center gap-3">
-            {/* avtar */}
-            <div className="relative mx-auto lg:mx-0">
-              <div className="skeleton size-12 rounded-full" />
-            </div>
-            {/* user info for lg screen */}
-            <div className="hidden lg:block text-left min-w-0 flex-col ">
-              <div className="skeleton h-4 w-32 mb-2" />
-              <div className="skeleton h-3 w-16" />
-            </div>
-          </div>
+      {/*  contacts */}
+      <div className="overflow-y-scroll scrollbar-hide w-full py-3">
+        {filteredUsers.map((user) => (
+          <button onClick={() => setSelectedUser(user)} key={user._id}></button>
         ))}
       </div>
     </aside>
