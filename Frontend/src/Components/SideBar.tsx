@@ -10,7 +10,7 @@ const SideBar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
     useChatStore() as ChatStore;
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
-  let onlineUsers = ["abhil", "abhi2", "abhi3", "abhi4", "abhi5"];
+  const onlineUsers = ["abhil", "abhi2", "abhi3", "abhi4", "abhi5"];
 
   const filteredUsers = showOnlineOnly
     ? users.filter((user) => onlineUsers.includes(user._id))
@@ -64,12 +64,21 @@ const SideBar = () => {
                 width={40}
                 height={40}
               />
-              {/* {onlineUsers.includes(user._id) && (
+              {onlineUsers.includes(user._id) && (
                 <span className="abolute bottom-0 right-0 size-3 bg-green-500 rounded-full ring-zinc-900 " />
-              )} */}
+              )}
+            </div>
+            <div className="hidden lg:flex text-left min-w-0  flex-col">
+              <span className="font-medium text-sm text-zinc-400 ">
+                {onlineUsers.includes(user?._id) ? "online" : "offline"}
+              </span>
             </div>
           </button>
         ))}
+
+        {
+          filteredUsers.length === 0 && <span className="text-sm text-zinc-500 py-4 text-center">No users online</span>
+        }
       </div>
     </aside>
   );
