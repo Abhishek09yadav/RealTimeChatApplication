@@ -5,11 +5,12 @@ import { ChatStore } from "./types";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
 import "./HideScrollBar.css";
+import Image from "next/image";
 const SideBar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
     useChatStore() as ChatStore;
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
-  let onlineUsers = [];
+  let onlineUsers = ["abhil", "abhi2", "abhi3", "abhi4", "abhi5"];
 
   const filteredUsers = showOnlineOnly
     ? users.filter((user) => onlineUsers.includes(user._id))
@@ -46,7 +47,28 @@ const SideBar = () => {
       {/*  contacts */}
       <div className="overflow-y-scroll scrollbar-hide w-full py-3">
         {filteredUsers.map((user) => (
-          <button onClick={() => setSelectedUser(user)} key={user._id}></button>
+          <button
+            onClick={() => setSelectedUser(user)}
+            key={user._id}
+            className={`w-full p-3 flex items-center gap-3 hover:bg-base-200 transition-colors ${
+              selectedUser?._id === user._id
+                ? "bg-base-200 ring-1 ring-base-300 rounded-md"
+                : ""
+            }`}
+          >
+            <div className="relative mx-auto lg:mx-0">
+              <Image
+                src={user?.ProfilePic || "/profile.png"}
+                alt="profile"
+                className="rounded-full"
+                width={40}
+                height={40}
+              />
+              {/* {onlineUsers.includes(user._id) && (
+                <span className="abolute bottom-0 right-0 size-3 bg-green-500 rounded-full ring-zinc-900 " />
+              )} */}
+            </div>
+          </button>
         ))}
       </div>
     </aside>
