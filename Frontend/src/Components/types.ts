@@ -54,7 +54,7 @@ export interface Message{
 }
 export interface ChatStore {
   isUserLoading: boolean;
-  isUsersLoading: boolean;
+  // isUsersLoading: boolean;
   isMessagesLoading: boolean;
   messages: Message[];
   users: User[];

@@ -7,7 +7,7 @@ export const useChatStore = create<ChatStore>((set) => ({
   messages: [],
   users: [],
   selectedUser: null,
-  isUserLoading: false,
+  isUserLoading: false, 
   isMessagesLoading: false,
   setSelectedUser: (userId) => set({ selectedUser: userId }),
 
@@ -18,7 +18,7 @@ export const useChatStore = create<ChatStore>((set) => ({
       set({ users: res.data });
     } catch (error) {
       const err = error as AxiosErrorResponse;
-      toast.error(err?.response?.data?.message || "Something went wrong") ;
+      toast.error(err?.response?.data?.message || "Something went wrong");
     } finally {
       set({ isUserLoading: false });
     }
