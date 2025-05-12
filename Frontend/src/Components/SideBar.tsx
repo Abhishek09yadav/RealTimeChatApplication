@@ -56,29 +56,39 @@ const SideBar = () => {
                 : ""
             }`}
           >
-            <div className="relative mx-auto lg:mx-0">
+            <div className="relative mx-auto lg:mx-0 ">
               <Image
-                src={user?.ProfilePic || "/profile.png"}
+                src={user?.profilePic || "/profile.png"}
                 alt="profile"
-                className="rounded-full"
+                className="rounded-full w-10 h-10 "
                 width={40}
                 height={40}
               />
               {onlineUsers.includes(user._id) && (
-                <span className="abolute bottom-0 right-0 size-3 bg-green-500 rounded-full ring-zinc-900 " />
+                <span className="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full ring-zinc-900 " />
               )}
             </div>
-            <div className="hidden lg:flex text-left min-w-0  flex-col">
-              <span className="font-medium text-sm text-zinc-400 ">
-                {onlineUsers.includes(user?._id) ? "online" : "offline"}
-              </span>
+            {/* User info */}
+
+            <div className="flex flex-col">
+              <div className="font-medium text-sm text-zinc-400 ">
+                {user?.fullName}
+              </div>
+
+              <div className="hidden lg:flex text-left min-w-0  flex-col">
+                <span className="font-medium text-sm text-zinc-400 ">
+                  {onlineUsers.includes(user?._id) ? "online" : "offline"}
+                </span>
+              </div>
             </div>
           </button>
         ))}
 
-        {
-          filteredUsers.length === 0 && <span className="text-sm text-zinc-500 py-4 text-center">No users online</span>
-        }
+        {filteredUsers.length === 0 && (
+          <span className="text-sm text-zinc-500 py-4 text-center">
+            No users online
+          </span>
+        )}
       </div>
     </aside>
   );

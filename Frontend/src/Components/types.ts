@@ -42,7 +42,7 @@ export interface User{
   _id:string;
   fullName:string;
   email:string;
-  ProfilePic?:string;
+  profilePic?:string;
   createdAt:string;
 }
 export interface Message{
@@ -54,6 +54,7 @@ export interface Message{
 }
 export interface ChatStore {
   isUserLoading: boolean;
+  isUsersLoading: boolean;
   // isUsersLoading: boolean;
   isMessagesLoading: boolean;
   messages: Message[];
