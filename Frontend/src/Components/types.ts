@@ -57,10 +57,11 @@ export interface ChatStore {
   isUsersLoading: boolean;
   // isUsersLoading: boolean;
   isMessagesLoading: boolean;
+  onlineUsers: string[];
   messages: Message[];
   users: User[];
   selectedUser: User | null;
-  setSelectedUser: (user: User) => void;
+  setSelectedUser: (user: User) => string | null;
   getMessages: (userId: string) => Promise<void>;
   getUsers: () => Promise<void>;
 }

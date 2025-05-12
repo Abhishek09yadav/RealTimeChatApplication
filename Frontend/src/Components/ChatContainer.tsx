@@ -26,7 +26,7 @@ const ChatContainer = () => {
   return (
     <div className="flex flex-col overflow-auto">
       <ChatHeader />
-      <p>messages .... </p>
+      {/* <p>messages .... </p> */}
       <MessageContainer  />
     
     </div>
