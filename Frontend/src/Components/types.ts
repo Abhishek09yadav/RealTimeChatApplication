@@ -6,6 +6,7 @@ export interface AuthUser {
 }
 
 export interface AuthStore {
+  onlineUsers: string[];
   authUser: AuthUser | null;
   checkAuth: () => void;
   isCheckingAuth: true | false;
@@ -57,11 +58,12 @@ export interface ChatStore {
   isUsersLoading: boolean;
   // isUsersLoading: boolean;
   isMessagesLoading: boolean;
-  onlineUsers: string[];
+  
   messages: Message[];
   users: User[];
   selectedUser: User | null;
   setSelectedUser: (user: User) => string | null;
   getMessages: (userId: string) => Promise<void>;
   getUsers: () => Promise<void>;
+  
 }

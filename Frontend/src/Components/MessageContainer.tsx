@@ -1,9 +1,11 @@
 import React from 'react'
+import MessageSkeleton from './skeletons/MessageSkeleton'
+
 
 const MessageContainer = () => {
   return (
     <div>
-      message container......
+    <MessageSkeleton />
     </div>
   )
 }
