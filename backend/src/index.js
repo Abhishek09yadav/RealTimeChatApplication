@@ -6,10 +6,12 @@ import connectDB from "./lib/db.js";
 import cookieParser from 'cookie-parser'
 import User from "./models/user.model.js";
 import cors from 'cors'
+
+dotenv.config();
+
 const PORT = process.env.PORT || 5999;
 const app = express();
 app.use(cookieParser());
-dotenv.config();
 app.use(
   cors({
     origin: "http://localhost:2703",
