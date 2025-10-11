@@ -23,32 +23,32 @@ const Navbar = () => {
             <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center ">
               <MessageSquare />
             </div>
-            <h1 className="font-bold text-primary transition-colors">
+            <h1 className="font-bold text-primary transition-colors hidden sm:block">
               Chat App
             </h1>
           </div>
           {/* settings and profile section */}
-          <div className="flex flex-row items-center gap-3 cursor-pointer">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-row items-center gap-2 sm:gap-3 cursor-pointer">
+            <div className="flex items-center gap-2 sm:gap-3">
               <div
-                className=" btn btn-sm gap-2 transition-colors"
+                className="btn btn-sm gap-2 transition-colors"
                 onClick={() => router.push("/SettingsPage")}
               >
                 <Settings className="w-4 h-4" />
-                <span>Settings</span>
+                <span className="hidden sm:inline">Settings</span>
               </div>
             </div>
             {authUser && (
               <>
                 <div
-                  className="flex items-center bg-accent p-2 rounded-md  gap-1 transition-colors cursor-pointer"
+                  className="flex items-center bg-accent p-2 rounded-md gap-1 transition-colors cursor-pointer"
                   onClick={() => router.push("/ProfilePage")}
                 >
-                  <User />
-                  <span>{authUser?.fullName.split(" ")[0] || "profile"}</span>
+                  <User className="w-4 h-4" />
+                  <span className="hidden sm:inline">{authUser?.fullName.split(" ")[0] || "profile"}</span>
                 </div>
-                <button onClick={logout} className="cursor-pointer">
-                  <LogOut />
+                <button onClick={logout} className="cursor-pointer p-2">
+                  <LogOut className="w-4 h-4" />
                 </button>
               </>
             )}
