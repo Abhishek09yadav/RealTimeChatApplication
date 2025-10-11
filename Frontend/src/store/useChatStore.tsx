@@ -3,11 +3,11 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import { axiosInstance } from "@/lib/axios";
 import { AxiosErrorResponse, ChatStore } from "@/Components/types";
-export const useChatStore = create<ChatStore>((set) => ({
+export const useChatStore = create<ChatStore>((set, get) => ({
   messages: [],
   users: [],
   selectedUser: null,
-  isUserLoading: false, 
+  isUserLoading: false,
   isMessagesLoading: false,
   setSelectedUser: (userId) => set({ selectedUser: userId }),
 
@@ -37,5 +37,18 @@ export const useChatStore = create<ChatStore>((set) => ({
       .finally(() => {
         set({ isMessagesLoading: false });
       });
+  },
+  sendMessage: async (messageData) => {
+    const { selectedUser, messages } = get();
+    try {
+      const res = await axiosInstance.post(
+        `messages/send/${selectedUser?._id}`,
+        messageData
+      );
+      set({ messages: [...messages, res.data] });
+    } catch (error) {
+      const err = error as AxiosErrorResponse;
+      toast.error(err?.response?.data?.message || "Something went wrong");
+    }
   },
 }));

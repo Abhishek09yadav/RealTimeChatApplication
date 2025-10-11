@@ -3,6 +3,7 @@ import { ChatStore } from "./types";
 import { useChatStore } from "@/store/useChatStore";
 import ChatHeader from "./skeletons/ChatHeader";
 import MessageContainer from "./MessageContainer";
+import MessageInput from "./MessageInput";
 
 const ChatContainer = () => {
   const { selectedUser, messages, isMessagesLoading, getMessages } =
@@ -28,7 +29,7 @@ const ChatContainer = () => {
       <ChatHeader />
       {/* <p>messages .... </p> */}
       <MessageContainer  />
-    
+      <MessageInput/>
     </div>
   );
 };

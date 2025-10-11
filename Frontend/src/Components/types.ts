@@ -62,4 +62,5 @@ export interface ChatStore {
   setSelectedUser: (user: User | null) => void;
   getMessages: (userId: string) => Promise<void>;
   getUsers: () => Promise<void>;
+  sendMessage: (messageData: Message) => Promise<void>;
 }

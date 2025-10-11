@@ -7,7 +7,7 @@ import { Users } from "lucide-react";
 import "./HideScrollBar.css";
 import Image from "next/image";
 const SideBar = () => {
-  const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
+  const { getUsers, users, selectedUser, setSelectedUser, isUserLoading } =
     useChatStore() as ChatStore;
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
   const onlineUsers = ["abhil", "abhi2", "abhi3", "abhi4", "abhi5"];
@@ -19,7 +19,7 @@ const SideBar = () => {
   useEffect(() => {
     getUsers();
   }, [getUsers]);
-  if (isUsersLoading) return <SidebarSkeleton />;
+  if (isUserLoading) return <SidebarSkeleton />;
 
   return (
     <aside className="h-full w-38 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-300 ">
