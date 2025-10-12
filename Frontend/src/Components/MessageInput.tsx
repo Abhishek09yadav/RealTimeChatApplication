@@ -2,12 +2,14 @@
 import React, { useRef, useState } from "react";
 import { Image, Send, X } from "lucide-react";
 import { useChatStore } from "@/store/useChatStore";
-import { ChatStore } from "./types";
+
 const MessageInput = () => {
     const [text, setText] = useState("");
-    const [imagePreview, setImagePreview] = useState(null);
-    const fileInputRef = useRef(null)
-    const {sendMessage} = useChatStore<ChatStore>;
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const { sendMessage } = useChatStore();
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {}
+    const removeImage = () =>{}
   return (
     <div>
       input area
