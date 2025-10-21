@@ -24,6 +24,8 @@
 .DS_Store
 *.pem
 .env
+.qodo
+.amazonq
 # debug
 npm-debug.log*
 yarn-debug.log*
