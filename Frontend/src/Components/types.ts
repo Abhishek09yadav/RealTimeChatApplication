@@ -53,6 +53,10 @@ export interface Message{
   text:string;
   createdAt:string;
 }
+export interface MessageData {
+  text: string;
+  image?: string | null;
+}
 export interface ChatStore {
   isUserLoading: boolean;
   isMessagesLoading: boolean;
@@ -62,5 +66,5 @@ export interface ChatStore {
   setSelectedUser: (user: User | null) => void;
   getMessages: (userId: string) => Promise<void>;
   getUsers: () => Promise<void>;
-  sendMessage: (messageData: Message) => Promise<void>;
+  sendMessage: (messageData: MessageData) => Promise<void>;
 }

@@ -5,6 +5,7 @@ import { CiImageOn } from "react-icons/ci";
 import { useChatStore } from "@/store/useChatStore";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import { types } from "util";
 
 const MessageInput = () => {
   const [text, setText] = useState("");
@@ -27,7 +28,16 @@ const MessageInput = () => {
     setImagePreview(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
-  const handleSubmit = () => {};
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!text.trim() && !imagePreview) return;
+    try {
+      await sendMessage({
+        text: text.trim(),
+        image: imagePreview,
+      });
+    } catch (err) {}
+  };
   return (
     <div className="p-4 w-full">
       {imagePreview && (
@@ -70,14 +80,17 @@ const MessageInput = () => {
           <button
             type="button"
             className={`hidden sm:flex btn btn-circle ${imagePreview} ? "text-emrald-500" : "text-zinc-400"`}
-            onClick={() => fileInputRef.current?.click()}  >
+            onClick={() => fileInputRef.current?.click()}
+          >
             <CiImageOn />
           </button>
         </div>
-        <button type="submit" className="btn btn-outline cursor-pointer btn-circle"
-        disabled={!text.trim() && !imagePreview}
+        <button
+          type="submit"
+          className="btn btn-outline cursor-pointer btn-circle"
+          disabled={!text.trim() && !imagePreview}
         >
-          <Send size={22}/>
+          <Send size={22} />
         </button>
       </form>
     </div>
