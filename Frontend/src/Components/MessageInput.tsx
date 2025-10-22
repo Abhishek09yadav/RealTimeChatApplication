@@ -47,8 +47,11 @@ const MessageInput = () => {
           </div>
         </div>
       )}
-      <form onSubmit={handleSubmit} className="flex items-center gap-2 ">
-        <div className="flex flex-1 gap-2">
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center gap-2 justify-center "
+      >
+        <div className="flex flex-1 gap-2 items-center  justify-center">
           <input
             type="text"
             className="w-full  input input-bordered rounded-lg  input-sm"
@@ -60,14 +63,22 @@ const MessageInput = () => {
           <input
             type="file"
             accept="image/*"
-            className="hidden cursor-pointer sm:flex justify-center items-center btn btn-circle "
+            className="hidden"
             ref={fileInputRef}
             onChange={handleImageChange}
           />
-          <button type="button" className={``}>
+          <button
+            type="button"
+            className={`hidden sm:flex btn btn-circle ${imagePreview} ? "text-emrald-500" : "text-zinc-400"`}
+            onClick={() => fileInputRef.current?.click()}  >
             <CiImageOn />
           </button>
         </div>
+        <button type="submit" className="btn btn-outline cursor-pointer btn-circle"
+        disabled={!text.trim() && !imagePreview}
+        >
+          <Send size={22}/>
+        </button>
       </form>
     </div>
   );
