@@ -51,18 +51,22 @@ const MessageInput = () => {
         <div className="flex flex-1 gap-2">
           <input
             type="text"
-            className="w-full input input-bordered rounded-lg input-sm sm:input-md "
+            className="w-full  input input-bordered rounded-lg  input-sm"
             placeholder="Type a message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
+
           <input
-          type="file"
-          accept="image/*"
-          className="hidden"
-          ref={fileInputRef}
-          onChange={handleImageChange}
-        />
+            type="file"
+            accept="image/*"
+            className="hidden cursor-pointer sm:flex justify-center items-center btn btn-circle "
+            ref={fileInputRef}
+            onChange={handleImageChange}
+          />
+          <button type="button" className={``}>
+            <CiImageOn />
+          </button>
         </div>
       </form>
     </div>
