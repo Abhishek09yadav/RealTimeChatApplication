@@ -42,12 +42,19 @@ const Navbar = () => {
               <>
                 <div
                   className="flex items-center bg-accent p-2 rounded-md gap-1 transition-colors cursor-pointer"
+                  title="your account"
                   onClick={() => router.push("/ProfilePage")}
                 >
                   <User className="w-4 h-4" />
-                  <span className="hidden sm:inline">{authUser?.fullName.split(" ")[0] || "profile"}</span>
+                  <span className="hidden sm:inline">
+                    {authUser?.fullName.split(" ")[0] || "profile"}
+                  </span>
                 </div>
-                <button onClick={logout} className="cursor-pointer p-2">
+                <button
+                  onClick={logout}
+                  className="cursor-pointer p-2"
+                  title="Logout"
+                >
                   <LogOut className="w-4 h-4" />
                 </button>
               </>
