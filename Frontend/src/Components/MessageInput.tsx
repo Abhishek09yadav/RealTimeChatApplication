@@ -46,6 +46,9 @@ const MessageInput = () => {
             <Image
               src={imagePreview}
               alt="image"
+              width={80}
+              height={80}
+              unoptimized
               className="w-20 h-20 object-cover rounded-lg border border-zinc-700 "
             />
             <button
